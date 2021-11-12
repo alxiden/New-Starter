@@ -1,0 +1,32 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
+import time
+
+browser = webdriver.Firefox()
+
+links = ['link 1','link 2']
+
+name = ''
+email = ''
+
+def add(links, name, email):
+    for link in links:
+        browser.get(link)
+        browser.find_element(By.XPATH, '/html/body/div/div[1]/div[2]/ul/li[2]/a').click()
+        time.sleep(2)
+        browser.find_element(By.XPATH,'/html/body/div/div[2]/div[3]/div[3]/div[2]/div[3]/form/div[2]/input[1]').click()
+        time.sleep(2)
+        txt = browser.find_element(By.XPATH, '//*[@id="element14"]')
+        txt.click()
+        txt.send_keys(name)
+        time.sleep(2)
+        txt = browser.find_element(By.XPATH, '//*[@id="element50"]')
+        txt.click()
+        txt.send_keys(email)
+        time.sleep(2)
+        browser.find_element(By.XPATH, '/html/body/div/div[2]/div[3]/div[3]/div[2]/div[3]/form/div[2]/table[3]/tbody/tr[1]/td/input[2]').click()
+    browser.close()
+
+add(links,name,email)
